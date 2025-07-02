@@ -3,10 +3,19 @@ this is a system utilizing a DOIT ESP32 Devkit V1, DHT22 temp & humidity sensor,
 I used the ESP-NOW protocol to transmit data to a receiver ESP32, which then transmits the collected data to Adafruit IO cloud (I will post its code in another file)
 
 Both the OLED display and MCP sensor is wired up to the ESP32’s I2C bus through each module’s SCL and SDA lines, displaying all the data collected by all the sensors in real-time. 
-The LEDs blink or fully light up when the soil moisture percentage reaches below a certain threshold. In this configuration, the yellow LED blinks when the soil moisture percentage recorded by the resistive soil moisture sensor reaches below 30%, 
-fully lights up when the soil moisture percentage is between 30% and 50%, and shuts off when the soil moisture level is above 50%. Similar to the yellow LED, the red LED behaves the exact same way as the yellow LED, 
-but is responsive only to the soil moisture data collected from capacitive soil moisture sensor. When calibrating both sensors, the resistive soil moisture sensor sends a raw value of 4095 when completely dry, 
-and records a raw value of around 1580 when fully submerged in water (wet value). The capacitive soil moisture sensor transmits a raw value of around 3700 when dry, and around 1550 when wet. 
+The LEDs blink or stays off depending on the soil moisture percentage. In this configuration, each LED is paired with a capacitive soil moisture sensor. 
+
+When soil moisture percentage is 0-19%, it stays off.
+When soil moisture percentage is 20-39%, it blinks once.
+When soil moisture percentage is 40-59%, it blinks twice.
+When soil moisture percentage is 60-79%, it blinks thrice.
+When soil moisture percentage is 80-100%, it blinks four to five times.
+
+Each blink consists of 200ms ON and 100ms OFF.
+Each cycle runs totalBlinks × 2 (because each blink is 1 ON + 1 OFF).
+Once blinking finishes, the LED stays off until a new blink count is triggered.
+
+When calibrating the sensors, the capacitive soil moisture sensors transmits a raw value of around 3600 when dry, and around 1600 when wet. 
 
 This code was created in Arduino IDE, and was directly flashed onto the ESP32 from the IDE.
 I also may have had the help of AI in the creation of this code :)
