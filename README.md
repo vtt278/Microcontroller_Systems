@@ -1,5 +1,6 @@
 # MCU-Code
 //----------------------------------------------------------------
+
 Adafruit ESP32 Feather V2 HC-SR04 Distance Sensor using an SSD1306 OLED Display (Adafruit IO IoT) notes:
 
 This system use a HC-SR04 module to detect distance to an object in front of the sensor, and displays the data from the sensor on an SSD1306 0.96" OLED display
@@ -23,6 +24,7 @@ Connections:
 
 
 //----------------------------------------------------------------
+
 The Learning Farm ESP32 Automated Irrigation System with IoT Data Collection (Data Sender using ESP-NOW) notes:
 
 This system uses 5V relays instead of MOSFETs for 12V DC Water pump and 12V DC Solenoid valve control
@@ -53,6 +55,7 @@ This code was created in Arduino IDE, and was directly flashed onto the ESP32 fr
 I also may have had the help of AI in the creation of this code :)
 
 //----------------------------------------------------------------
+
 The Learning Farm ESP32 Node MCU IoT Data Collection (Data Receiver using ESP-NOW) notes:
 
 This system does not have any peripherals, and is only connected to a 5V power source to function.
