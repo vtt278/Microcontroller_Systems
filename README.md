@@ -1,5 +1,5 @@
 # MCU-Code
-//
+//----------------------------------------------------------------
 Adafruit ESP32 Feather V2 HC-SR04 Distance Sensor using an SSD1306 OLED Display (Adafruit IO IoT) notes:
 
 This system use a HC-SR04 module to detect distance to an object in front of the sensor, and displays the data from the sensor on an SSD1306 0.96" OLED display
@@ -22,7 +22,7 @@ Connections:
  - Buzzer (via NPN transistor): GPIO 25 (connect a 1k ohm resistor from ESP32 GPIO to the transistor's base pin. Buzzer's negative terminal is connected to S8050 collector, then BJT emitter leg to ground)
 
 
-//
+//----------------------------------------------------------------
 The Learning Farm ESP32 Automated Irrigation System with IoT Data Collection (Data Sender using ESP-NOW) notes:
 
 This system uses 5V relays instead of MOSFETs for 12V DC Water pump and 12V DC Solenoid valve control
@@ -51,3 +51,13 @@ When calibrating the sensors, the capacitive soil moisture sensors transmits a r
 
 This code was created in Arduino IDE, and was directly flashed onto the ESP32 from the IDE.
 I also may have had the help of AI in the creation of this code :)
+
+//----------------------------------------------------------------
+The Learning Farm ESP32 Node MCU IoT Data Collection (Data Receiver using ESP-NOW) notes:
+
+This system does not have any peripherals, and is only connected to a 5V power source to function.
+It uses The Learning Farm's local WiFi channel, and directly transmits all data it collects to a cloud network (adafruit IO)
+I used the ESP-NOW protocol to transmit data to this receiver ESP32 from the sender ESP32, which then transmits the collected data to Adafruit IO cloud
+It sends the data from a DHT22 sensor and 4 capacitive soil moisture sensors from the other ESP32 system 
+
+This code was created in Arduino IDE, and was directly flashed onto the ESP32 from the IDE.
