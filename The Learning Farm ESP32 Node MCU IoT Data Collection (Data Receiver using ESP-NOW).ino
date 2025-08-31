@@ -2,16 +2,6 @@
 // The Learning Farm ESP32 Node MCU IoT Data Collection (Data Receiver using ESP-NOW)
 //
 // Vincent Tjoa, July 3, 2025
-//
-// This system does not have any peripherals, and is only connected to a 5V power source to function.
-// It uses The Learning Farm's local WiFi channel, and directly transmits all data it collects to a cloud network (adafruit IO)
-// I used the ESP-NOW protocol to transmit data to this receiver ESP32 from the sender ESP32, which then transmits the collected data to Adafruit IO cloud
-// It sends the data from a DHT22 sensor and 4 capacitive soil moisture sensors from the other ESP32 system 
-//
-// This code was created in Arduino IDE, and was directly flashed onto the ESP32 from the IDE.
-
-
-// NodeMCU_esp32devmodule_espnow_receiver
 
 #include <AdafruitIO_WiFi.h>
 #include <WiFi.h>
