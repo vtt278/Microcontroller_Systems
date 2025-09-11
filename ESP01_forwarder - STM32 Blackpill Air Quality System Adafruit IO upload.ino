@@ -1,5 +1,5 @@
 //----------------------------------------------------------------
-// ESP01_forwarder for STM32F401CCU6 Blackpill ESP01 Air Quality System
+// ESP01_forwarder for STM32F401CCU6 Blackpill ESP01 Air Quality System (Adafruit IO upload)
 // Upload to ESP01 (ESP8266 core).
 // Connect ESP01 TX/RX to STM32 Serial1 (A3/A2) crossed: ESP01 RX <- STM32 TX
 //
