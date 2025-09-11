@@ -8,11 +8,11 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-// === Pin Definitions ===
+// Pin Definitions
 #define RCWL_PIN     11    // Motion sensor OUT
 #define BUZZER_PIN    3    // Buzzer control pin
 
-// === OLED Setup ===
+// OLED Setup
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET    -1
