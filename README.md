@@ -1,4 +1,4 @@
-# MCU-Code
+# MCU Code
 //----------------------------------------------------------------
 
 Adafruit ESP32 Feather V2 HC-SR04 Distance Sensor using an SSD1306 OLED Display (Adafruit IO IoT) notes:
