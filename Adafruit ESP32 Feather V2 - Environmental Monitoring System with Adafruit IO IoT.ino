@@ -1,5 +1,5 @@
 //----------------------------------------------------------------
-// Adafruit ESP32 Feather V2 Environmental System (Adafruit IO IoT)
+// Adafruit ESP32 Feather V2 Environmental Monitoring System (Adafruit IO IoT)
 //
 // Vincent Tjoa
 // September 11, 2025
