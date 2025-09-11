@@ -1,7 +1,8 @@
 //----------------------------------------------------------------
-// Arduino_Uno_R3_RCWL0516_security_system
+// Arduino Uno R3 RCWL0516 security system
 //
-// Vincent Tjoa, 10 July 2025
+// Vincent Tjoa
+// July 10, 2025
 
 #include <Wire.h>
 #include <Adafruit_GFX.h>
