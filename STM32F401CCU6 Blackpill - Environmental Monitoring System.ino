@@ -1,5 +1,5 @@
 //----------------------------------------------------------------
-// STM32F401CCU6 Blackpill Environmental System
+// STM32F401CCU6 Blackpill Environmental Monitoring System
 //
 // Vincent Tjoa
 // September 11, 2025
