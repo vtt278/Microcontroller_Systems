@@ -1,7 +1,8 @@
 //----------------------------------------------------------------
-// Adafruit ESP32 Feather V2 HC-SR04 Distance Sensor using an SSD1306 OLED Display (Adafruit IO IoT)
+// Adafruit ESP32 Feather V2 HC-SR04 Distance Sensor (Adafruit IO IoT)
 //
-// Vincent Tjoa, July 3, 2025
+// Vincent Tjoa
+// September 11, 2025
 
 #include <WiFi.h>
 #include <AdafruitIO_WiFi.h>
