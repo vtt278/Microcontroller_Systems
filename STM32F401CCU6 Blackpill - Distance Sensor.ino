@@ -24,7 +24,7 @@ const uint8_t ECHO_PIN = A1; // PA1
 const uint8_t BUZZER_PIN = A5; // PA5 (S8050 base via resistor)
 
 // Timing
-const unsigned long INTERVAL_MS = 1000;
+const unsigned long INTERVAL_MS = 1000; //1s delay
 unsigned long lastMillis = 0;
 
 void setup() {
