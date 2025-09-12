@@ -107,5 +107,5 @@ void loop() {
   display.drawStr(0, 48, ("Soil Moisture 2: " + String(moisture_percent2) + " %").c_str());
   display.sendBuffer();
 
-  delay(1000);
+  delay(15000); //15s delay
 }
