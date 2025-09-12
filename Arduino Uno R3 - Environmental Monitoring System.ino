@@ -17,7 +17,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 #define MOISTURE_PIN2 A1
 
 unsigned long lastUpdate = 0;
-const unsigned long updateInterval = 1000; // 1s
+const unsigned long updateInterval = 15000; // 15s
 
 // SHTC3 constants
 #define SHTC3_ADDR 0x70
