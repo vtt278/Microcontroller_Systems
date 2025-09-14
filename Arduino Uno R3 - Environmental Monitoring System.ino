@@ -62,13 +62,19 @@ void setup() {
     Serial.println(F("❌ SSD1306 not found!"));
     for (;;); // Halt
   }
+
+  // Initial screen
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 25);
-  display.println(F("Enviro Monitor"));
+  display.setCursor(30, 15);
+  display.println("Environmental");
+  display.setCursor(35,25);
+  display.println("Monitoring");
+  display.setCursor(50, 35);
+  display.println("Device");
   display.display();
-  delay(1500);
+  delay(500);
 
   Serial.println(F("✅ Setup complete, starting measurements..."));
 }
@@ -92,28 +98,14 @@ void loop() {
     // OLED Display
     display.clearDisplay();
     display.setTextSize(1);
-    display.setTextColor(SSD1306_WHITE);
-
-    display.setCursor(0, 0);
-    display.print("Temp: ");
-    display.print(temp, 1);
-    display.print(" C");
-
-    display.setCursor(0, 16);
-    display.print("Humidity: ");
-    display.print(hum, 1);
-    display.print(" %");
-
-    display.setCursor(0, 32);
-    display.print("Soil 1: ");
-    display.print(soil1);
-    display.print(" %");
-
-    display.setCursor(0, 48);
-    display.print("Soil 2: ");
-    display.print(soil2);
-    display.print(" %");
-
+    display.setCursor(0, 10);
+    display.printf("SHTC3 Temp : %.1f C\n", temperature);
+    display.setCursor(0, 20);
+    display.printf("SHTC3 Humidity : %.1f C\n", humidity);
+    display.setCursor(0, 30);
+    display.printf("Soil Moisture 1: %d %%", soil1);  // Display unchanged
+    display.setCursor(0, 40);
+    display.printf("Soil Moisture 2: %d %%", soil2);
     display.display();
 
     // Debug output
