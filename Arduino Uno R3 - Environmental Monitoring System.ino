@@ -98,14 +98,27 @@ void loop() {
     // OLED Display
     display.clearDisplay();
     display.setTextSize(1);
+
     display.setCursor(0, 10);
-    display.printf("SHTC3 Temp : %.1f C\n", temperature);
+    display.print("SHTC3 Temp : ");
+    display.print(temp, 1);   // 1 decimal place
+    display.println(" C");
+
     display.setCursor(0, 20);
-    display.printf("SHTC3 Humidity : %.1f C\n", humidity);
+    display.print("SHTC3 Humidity : ");
+    display.print(hum, 1);      // 1 decimal place
+    display.println(" %");
+
     display.setCursor(0, 30);
-    display.printf("Soil Moisture 1: %d %%", soil1);  // Display unchanged
+    display.print("Soil Moisture 1: ");
+    display.print(soil1);
+    display.println(" %");
+
     display.setCursor(0, 40);
-    display.printf("Soil Moisture 2: %d %%", soil2);
+    display.print("Soil Moisture 2: ");
+    display.print(soil2);
+    display.println(" %");
+
     display.display();
 
     // Debug output
