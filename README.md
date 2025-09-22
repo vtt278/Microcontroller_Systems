@@ -1,5 +1,5 @@
 # TheLearningFarm-ESP32-Code
-Here is some C++ code on Arduino IDE for my ESP32-based Automated Irrigation System with IoT Data Collection
+AgriSync.ID C++ code on Arduino IDE for my ESP32-based Automated Irrigation System with IoT Data Collection
 
 Start Date: February 2025
 
@@ -9,6 +9,6 @@ Location: The Learning Farm (TLF), Kawungluwuk Village, Sukaresmi, Cianjur Regen
 
 Description:
 
-To confirm the feasability of IoT-based automated irrigation systems with ESP32 microcontrollers in Javanese highland farming conditions,
-various ESP32 prototypes and an automated irrigation system were implemented in TLF, collecting data on water usage, electricity usage, crop growth, crop health, etc.
+To confirm the feasability of a microcontroller-based automated irrigation system with ESP32s in Javanese highland farming conditions.
+Various ESP32 prototypes and an automated irrigation system were implemented in TLF, collecting data on water usage, electricity usage, crop growth, crop health, etc.
 This repository possesses the code required to operate these systems.
