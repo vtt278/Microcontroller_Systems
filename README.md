@@ -1,5 +1,5 @@
 # MCU Code
-## This is the code used for Vincent Tjoa's research paper: Evaluating Microcontroller Suitability for Battery-powered IoT Prototyping: A Comparative Study of ESP32, STM32, and Arduino Uno R3
+## Code used for Vincent Tjoa's research paper: Evaluating Microcontroller Suitability for Battery-powered IoT Prototyping: A Comparative Study of ESP32, STM32, and Arduino Uno R3
 //----------------------------------------------------------------
 
 ### Adafruit ESP32 Feather V2 Air Quality Monitor (Adafruit IO IoT) notes:
