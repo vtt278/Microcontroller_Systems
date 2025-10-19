@@ -101,7 +101,7 @@ This system measures air quality using two sensors: an MQ-135 gas sensor for CO�
 
 The MQ-135 is connected to the Arduino’s analog input (A0). At startup, the system calibrates the sensor to determine its R₀ (resistance in clean air), ensuring accurate gas concentration readings. The SDS011 communicates through UART (TX/RX on pins D8/D9) to provide particulate concentration data in µg/m³. Readings from both sensors are updated every 15 seconds.
 
-An SSD1306 OLED connected through I²C shows live PM2.5, PM10, and gas concentration readings. The ESP-01 (TX: D2, RX: D3) receives data from the Arduino Uno for wireless transmission to an IoT platform or another ESP-based receiver.
+An SSD1306 OLED connected through I²C shows live PM2.5, PM10, and gas concentration readings. The ESP-01 (TX: D2, RX: D3) receives data from the Arduino Uno for wireless transmission to Adafruit IO.
 
 Connections:
  - MQ135 analog output → A0
@@ -126,7 +126,7 @@ This system functions as a simple door monitoring module using an HC-SR04 ultras
 
 The HC-SR04 ultrasonic sensor measures distance by sending and receiving ultrasonic pulses. The Arduino interprets the returned echo time to calculate distance in centimeters. If the measured distance is less than 120 cm, the system assumes the door is “OPEN” and activates the buzzer. Otherwise, it shows “CLOSED” and turns the buzzer off.
 
-A 0.96” SSD1306 OLED display connected via I²C shows both the door status and the exact distance reading, refreshing once per second. The ESP-01 module connected via UART (Serial) receives the distance data for wireless transmission to a remote dashboard or microcontroller.
+A 0.96” SSD1306 OLED display connected via I²C shows both the door status and the exact distance reading, refreshing once per second. The ESP-01 module connected via UART (Serial) receives the distance data for wireless transmission to Adafruit OP through WiFi.
 
 Connections:
  - HC-SR04 TRIG → D9
@@ -142,3 +142,148 @@ Power and data flow summary:
  - The buzzer provides an audible alert when the door is detected as open.
 
 This program was written and uploaded via the Arduino IDE, using libraries for each module (HCSR04, Adafruit_SSD1306, Adafruit_GFX).
+
+//----------------------------------------------------------------
+
+### Arduino Uno R3 Environmental Monitoring System notes:
+
+This system monitors environmental parameters including temperature, humidity, and soil moisture using an SHTC3 sensor and two analog soil moisture probes. Data is displayed locally on a 0.96” SSD1306 OLED and transmitted via an ESP-01 module through serial communication for remote monitoring.
+
+The SHTC3 temperature and humidity sensor communicates over I²C (address 0x70). It provides accurate digital readings that are refreshed every 15 seconds. The two soil moisture sensors are connected to analog inputs (A0 and A1) and mapped from raw ADC readings (1023 dry → 0%, 300 wet → 100%) to display soil moisture percentages.
+
+All data is refreshed periodically and displayed on the OLED screen, showing temperature, humidity, and both soil moisture readings. Simultaneously, the same data is sent through the Serial interface to the ESP-01 for wireless data transmission to Adafruit IO.
+
+Connections:
+ - SHTC3: I²C (SDA/SCL from Arduino)
+ - Soil Moisture Sensor 1: A0
+ - Soil Moisture Sensor 2: A1
+ - OLED Display: I²C (SDA/SCL from Arduino)
+ - ESP-01 TX/RX → Serial pins
+
+Power and data flow summary:
+ - SHTC3 powered by 3.3V (I²C logic).
+ - Soil moisture sensors powered by 5V with shared ground.
+ - Data flows from sensors → Arduino Uno → OLED + ESP-01.
+ - Temperature, humidity, and soil moisture values are displayed and transmitted every 15 seconds.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (Wire, Adafruit_SSD1306, Adafruit_GFX).
+
+//----------------------------------------------------------------
+
+### Arduino Uno R3 RCWL-0516 Security System notes:
+
+This system detects motion using the RCWL-0516 microwave motion sensor and triggers a buzzer and OLED display alert when movement is detected. It can be used for indoor security applications such as motion alarms or presence detection systems.
+
+The RCWL-0516 outputs a HIGH signal when motion is detected. The Arduino reads this signal from digital pin 11 and activates the buzzer (connected to pin 3) accordingly. Detection status is displayed on a 0.96” SSD1306 OLED screen and logged through the serial monitor for debugging or data collection.
+
+Connections:
+ - RCWL-0516 OUT → D11
+ - Buzzer → D3
+ - OLED → I²C (SDA/SCL)
+
+Power and data flow summary:
+ - RCWL-0516 and OLED powered by 5V.
+ - Data flows from RCWL-0516 → Arduino Uno → OLED + buzzer.
+ - Motion detection results are displayed and outputted via serial.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (Wire, Adafruit_SSD1306, Adafruit_GFX).
+
+//----------------------------------------------------------------
+
+### STM32F401CCU6 Blackpill Air Quality Monitor notes:
+
+This system monitors air quality using an MQ-135 gas sensor and an SDS011 particulate matter sensor, displaying live readings on a 0.96” OLED screen and transmitting data to an ESP-01 for IoT monitoring. It measures PM2.5, PM10, CO₂, CO, and alcohol concentration in real time.
+
+The MQ-135 detects multiple gases via analog input (A0), while the SDS011 sends PM data through UART (PA10=RX, PA9=TX). Both datasets are processed and updated every 15 seconds. The STM32 communicates with the ESP-01 through Serial2 (A2=TX, A3=RX), sending data as a formatted string for further use in cloud platforms or remote dashboards.
+
+Connections:
+ - MQ-135 → A0 (analog)
+ - SDS011 → PA9 (TX), PA10 (RX)
+ - OLED → I²C (PB6=SCL, PB7=SDA)
+ - ESP-01 → A2 (TX), A3 (RX)
+
+Power and data flow summary:
+ - SHTC3 and OLED powered by 3.3V (I²C logic).
+ - MQ-135 sensor powered by 5V with shared ground.
+ - Data flows from sensors → STM32F401CCU6 → OLED + ESP-01.
+ - Air quality, temperature, and humidity values are displayed and transmitted periodically.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (Wire, U8g2, U8x8, MQUnifiedsensor).
+
+//----------------------------------------------------------------
+
+### STM32F401CCU6 Blackpill Distance Sensor notes:
+
+This system measures distance using an HC-SR04 ultrasonic sensor and displays the readings on a 0.96” OLED. It also determines door state (open or closed) and sends distance data to an ESP-01 module for wireless monitoring. A buzzer provides an alert when the door is closed.
+
+The HC-SR04 sensor triggers a 10 µs pulse and measures the echo duration to calculate distance in centimeters. When the measured distance is below 120 cm, the door is considered “OPEN”; otherwise, it is “CLOSED.” The buzzer (connected to A5) activates when the distance exceeds 120 cm. The OLED displays both the door state and measured distance, updated every second.
+
+Connections:
+ - HC-SR04 → A0 (Trig), A1 (Echo)
+ - OLED → I²C (PB6=SCL, PB7=SDA)
+ - ESP-01 → Serial1 (PA2=TX, PA3=RX, crossed)
+ - Buzzer → A5 (transistor-driven)
+
+Power and data flow summary:
+ - HC-SR04 powered by 5V with shared ground.
+ - OLED powered by 3.3V (I²C logic).
+ - Data flows from ultrasonic sensor → STM32F401CCU6 → OLED + ESP-01.
+ - Distance values are displayed and transmitted every few seconds.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (Wire, U8g2, U8x8).
+
+//----------------------------------------------------------------
+
+### STM32F401CCU6 Blackpill Environmental Monitoring System notes:
+
+This system monitors soil moisture, temperature, and humidity using two analog soil moisture sensors and an SHTC3 sensor. Data is displayed on a 0.96” OLED and transmitted to an ESP-01 via Serial2 for IoT monitoring.
+
+The SHTC3 provides temperature and humidity readings over I²C, while two soil sensors (connected to PB8 and PB9) provide analog values that are converted into moisture percentages. The OLED shows live environmental data updated every 15 seconds.
+
+Connections:
+ - SHTC3 → I²C (PB6=SCL, PB7=SDA)
+ - Soil 1 → PB9 (Analog)
+ - Soil 2 → PB8 (Analog)
+ - ESP-01 → Serial2 (A2=TX, A3=RX, crossed)
+
+Power and data flow summary:
+ - SHTC3 powered by 3.3V (I²C logic).
+ - Soil moisture sensors powered by 5V with shared ground.
+ - Data flows from sensors → STM32F401CCU6 → OLED + ESP-01.
+ - Temperature, humidity, and soil moisture values are displayed and transmitted every 15 seconds.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (Wire, SPI, U8g2, U8x8, Adafruit_SHTC3).
+
+//----------------------------------------------------------------
+
+### ALL ESP-01 FORWARDER CODE NOTES FOR STM32F401CCU6 SYSTEMS:
+
+An ESP-01 module uploads all the data received from the STM32 systems (using UART) to Adafruit IO via Wi-Fi.
+
+Connections:
+ - ESP-01 RX ← STM32 TX (A2)
+ - ESP-01 TX → STM32 RX (A3)
+
+Power and data flow summary:
+ - ESP-01 powered by 3.3V (logic and power).
+ - Data flows from Sensors → STM32 → ESP-01 → Wi-Fi → Adafruit IO.
+ - The ESP-01 receives serial data, parses sensor values, and uploads them to multiple Adafruit IO feeds.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (ESP8266WiFi, AdafruitIO_WiFi).
+
+//----------------------------------------------------------------
+
+### ALL ESP-01 FORWARDER CODE NOTES FOR Arduino Uno R3 SYSTEMS:
+
+An ESP-01 module uploads all the data received from the Arduino Uno R3 systems (also using UART like the STM32 setups) to Adafruit IO via Wi-Fi.
+
+Connections:
+ - ESP-01 RX ← Uno TX (pin 1)
+ - ESP-01 TX → Uno RX (pin 0)
+
+Power and data flow summary:
+ - ESP-01 powered by 3.3V (logic and power).
+ - Data flows from Sensors → Uno R3 → ESP-01 → Wi-Fi → Adafruit IO.
+ - The ESP-01 receives serial data, parses sensor values, and uploads them to multiple Adafruit IO feeds.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (ESP8266WiFi, AdafruitIO_WiFi).
