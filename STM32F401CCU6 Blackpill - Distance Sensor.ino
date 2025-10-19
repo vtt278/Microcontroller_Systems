@@ -1,9 +1,5 @@
 //----------------------------------------------------------------
 // STM32F401CCU6 Blackpill Distance Sensor
-// U8g2 on PB6 (SCL) / PB7 (SDA)
-// HC-SR04 trig = A0, echo = A1
-// Serial1 (PA2 = A2 TX1, PA3 = A3 RX1) -> to ESP01 (crossed)
-// Buzzer transistor base driven from A5 (PA5)
 //
 // Vincent Tjoa
 // September 11, 2025
