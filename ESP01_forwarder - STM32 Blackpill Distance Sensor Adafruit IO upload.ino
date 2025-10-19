@@ -1,13 +1,9 @@
 //----------------------------------------------------------------
 // ESP01_forwarder for STM32F401CCU6 Blackpill Distance Sensor (Adafruit IO upload)
-// Upload to ESP01 (ESP8266 core).
-// Connect ESP01 TX/RX to STM32 Serial1 (A3/A2) crossed: ESP01 RX <- STM32 TX
+// Upload to ESP01 (ESP8266 core)
 //
 // Vincent Tjoa
 // September 11, 2025
-// ESP01_forwarder for STM32 Blackpill Distance Sensor system
-// Upload to ESP01 (ESP8266 core).
-// Connect ESP01 TX/RX to STM32 Serial1 (A3/A2) crossed: ESP01 RX <- STM32 TX
 
 #include <ESP8266WiFi.h>
 #include <AdafruitIO_WiFi.h>
