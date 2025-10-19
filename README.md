@@ -50,11 +50,11 @@ SSD1306 is powered by 3.3V (can still be powered by 5V without voltage divider f
 Active buzzer and HC-SR04 distance sensor are powered by 5V through Adafruit ESP32 Feather V2's USB pin
 
 Connections:
- - HC-SR04 TRIG: GPIO 5
- - HC-SR04 ECHO: GPIO 36 (voltage divider from 5V powering the HC-SR04 to 3.3V, able to be tolerated by ESP32 GPIO)
- - OLED Display: I2C (SDA/SCL from ESP32)
- - Button: GPIO 4 (with internal pull-up resistor)
- - Buzzer (via NPN transistor): GPIO 25 (connect a 1k ohm resistor from ESP32 GPIO to the transistor's base pin. Buzzer's negative terminal is connected to S8050 collector, then BJT emitter leg to ground)
+ - HC-SR04 TRIG → GPIO 5
+ - HC-SR04 ECHO → GPIO 36 (voltage divider from 5V powering the HC-SR04 to 3.3V, able to be tolerated by ESP32 GPIO)
+ - OLED Display → I2C (SDA/SCL from ESP32)
+ - Button → GPIO 4 (with internal pull-up resistor)
+ - Buzzer (via NPN transistor) → GPIO 25 (connect a 1k ohm resistor from ESP32 GPIO to the transistor's base pin. Buzzer's negative terminal is connected to S8050 collector, then BJT emitter leg to ground)
 
 Power and data flow summary:
  - The HC-SR04 sends ultrasonic pulses and receives echoes to measure distance.
@@ -79,10 +79,10 @@ The SSD1306 OLED display shows real-time temperature, humidity, and both soil mo
 Wi-Fi and Adafruit IO connectivity allow the system to send temperature, humidity, and both soil moisture values to individual Adafruit IO feeds. If the connection drops, the ESP32 automatically attempts to reconnect to both Wi-Fi and Adafruit IO.
 
 Connections:
- - SHTC3: I2C (SDA/SCL from ESP32)
- - Soil Moisture Sensor 1: GPIO33 (analog input)
- - Soil Moisture Sensor 2: GPIO32 (analog input)
- - OLED Display: I2C (SDA/SCL from ESP32)
+ - SHTC3 → I2C (SDA/SCL from ESP32)
+ - Soil Moisture Sensor → GPIO33 (analog input)
+ - Soil Moisture Sensor 2 → GPIO32 (analog input)
+ - OLED Display → I2C (SDA/SCL from ESP32)
  - All sensors powered from 3.3V and GND
 
 Power and data flow summary:
@@ -104,7 +104,6 @@ The MQ-135 is connected to the Arduino’s analog input (A0). At startup, the sy
 An SSD1306 OLED connected through I²C shows live PM2.5, PM10, and gas concentration readings. The ESP-01 (TX: D2, RX: D3) receives data from the Arduino Uno for wireless transmission to an IoT platform or another ESP-based receiver.
 
 Connections:
-
  - MQ135 analog output → A0
  - SDS011 TX → D8
  - SDS011 RX → D9
@@ -113,9 +112,33 @@ Connections:
  - OLED Display → I²C (SDA/SCL from Arduino)
 
 Power and data flow summary:
-
  - MQ135 and SDS011 powered by 5V (common ground shared).
  - OLED runs on 3.3V I²C logic.
  - Data flows from sensors → Arduino Uno → OLED + ESP-01 (for wireless data transmission).
 
 This program was written and uploaded via the Arduino IDE, using libraries for each module (MQUnifiedsensor, SDS011, Adafruit_GFX, Adafruit_SSD1306, SoftwareSerial).
+
+//----------------------------------------------------------------
+
+### Arduino Uno R3 Door Security Distance Sensor notes:
+
+This system functions as a simple door monitoring module using an HC-SR04 ultrasonic sensor, SSD1306 OLED display, and a buzzer for alerts. It measures the distance between the sensor and a door surface to determine whether the door is open or closed, displaying the result locally and sending distance data to an ESP-01 via serial communication for IoT or remote monitoring.
+
+The HC-SR04 ultrasonic sensor measures distance by sending and receiving ultrasonic pulses. The Arduino interprets the returned echo time to calculate distance in centimeters. If the measured distance is less than 120 cm, the system assumes the door is “OPEN” and activates the buzzer. Otherwise, it shows “CLOSED” and turns the buzzer off.
+
+A 0.96” SSD1306 OLED display connected via I²C shows both the door status and the exact distance reading, refreshing once per second. The ESP-01 module connected via UART (Serial) receives the distance data for wireless transmission to a remote dashboard or microcontroller.
+
+Connections:
+ - HC-SR04 TRIG → D9
+ - HC-SR04 ECHO → D8
+ - Buzzer → D10
+ - OLED Display → I²C (SDA/SCL from Arduino)
+ - ESP-01 TX/RX → Serial pins (via SoftwareSerial or hardware Serial)
+
+Power and data flow summary:
+ - HC-SR04 and buzzer powered by 5V.
+ - OLED uses 3.3V I²C logic.
+ - Distance readings flow from HC-SR04 → Arduino Uno → OLED + ESP-01.
+ - The buzzer provides an audible alert when the door is detected as open.
+
+This program was written and uploaded via the Arduino IDE, using libraries for each module (HCSR04, Adafruit_SSD1306, Adafruit_GFX).
